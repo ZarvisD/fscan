@@ -7,7 +7,7 @@ import time
 import nmap
 from colorama import Fore
 
-
+zarvis= Fore.RED + "By:- Zarvis"
 print Fore.GREEN + """                                                                         
 
 XXXXXXX  XXXXX   XXXXX     X    X     X
@@ -16,9 +16,7 @@ X       X       X        X   X  X X   X
 XXXXX    XXXXX  X       X     X X  X  X
 X             X X       XXXXXXX X   X X
 X       X     X X     X X     X X    XX
-X        XXXXX   XXXXX  X     X X     X
-
-"""
+X        XXXXX   XXXXX  X     X X     X     (V1.0)""" + '\n\t\t\t\t\t'+zarvis
 
 que =  '\033[1;34m[?]\033[1;m'
 good = '\033[1;32m[+]\033[1;m'
@@ -37,10 +35,13 @@ def nmapscan(port):
     version= out['scan'][ip]['tcp'][port]['version']
     extrainfo= out['scan'][ip]['tcp'][port]['extrainfo']
     cpe= out['scan'][ip]['tcp'][port]['cpe']
-    if extrainfo=="":
-        print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version
-    else:
-        print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version + '  ' +'('+extrainfo+')'
+    try:
+    	if extrainfo=="":
+        	print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version
+    	else:
+        	print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version + '  ' +'('+extrainfo+')'
+    except:
+    	print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version
 
 
 def portscan(port):
