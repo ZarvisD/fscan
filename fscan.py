@@ -74,7 +74,7 @@ for x in range(30):
     t.start()
 
 
-for worker in range(8000,8100):
+for worker in range(1,65535):
     q.put(worker)
 
 
