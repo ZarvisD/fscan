@@ -5,9 +5,10 @@ import threading
 from queue import Queue
 import time
 import nmap
+from colorama import Fore
 
 
-print """                                                                         
+print Fore.GREEN + """                                                                         
 
 XXXXXXX  XXXXX   XXXXX     X    X     X
 X       X     X X     X   X X   XX    X
@@ -19,13 +20,15 @@ X        XXXXX   XXXXX  X     X X     X
 
 """
 
+que =  '\033[1;34m[?]\033[1;m'
+good = '\033[1;32m[+]\033[1;m'
 
 nm=nmap.PortScanner()
 ports=[]
 
 print_lock = threading.Lock()
 
-ip = raw_input("Enter your ip address: \t")
+ip = raw_input(que + " Enter your ip address: ")
 
 def nmapscan(port):
     out=nm.scan(ip,str(port))
@@ -35,9 +38,9 @@ def nmapscan(port):
     extrainfo= out['scan'][ip]['tcp'][port]['extrainfo']
     cpe= out['scan'][ip]['tcp'][port]['cpe']
     if extrainfo=="":
-        print '[+]' + '  ' +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version
+        print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version
     else:
-        print '[+]' + '  ' +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version + '  ' +'('+extrainfo+')'
+        print good+ '  '  +str(port)+'/tcp' + '  ' + state +'  '+product + '  ' +version + '  ' +'('+extrainfo+')'
 
 
 def portscan(port):
@@ -46,7 +49,7 @@ def portscan(port):
         con = s.connect((ip,port))
         with print_lock:
             ports.append(port)
-            print "[+]  " + str(port) + " is open"
+            print good+ '  ' + str(port) + " is open"
         con.close()
     except:
         pass
@@ -70,7 +73,7 @@ for x in range(30):
     t.start()
 
 
-for worker in range(1,65535):
+for worker in range(8000,8100):
     q.put(worker)
 
 
