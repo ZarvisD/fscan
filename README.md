@@ -15,6 +15,11 @@ Now enter the following command
 ```
 cd fscan
 ```
+Install the requirements using
+
+```
+pip install -r requirements.txt
+```
 
 Now, run the fscan by entering
 
